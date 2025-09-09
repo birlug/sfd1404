@@ -1,0 +1,50 @@
+name: fetch donates
+
+on:
+  schedule:
+    - cron: "25 12 * * *"
+  workflow_dispatch:
+
+jobs:
+  fetch-donates:
+    runs-on: ubuntu-latest
+    environment: github-pages
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+
+      - name: extract donations
+        env:
+          AUTH_TOKEN: ${{ secrets.DONATES_AUTH }}
+        run: |
+            curl -s -X POST "https://daramet.com/api/Donates/Messages" -H "Authorization: $AUTH_TOKEN" \
+              | python3 -c '
+            import sys, json, os
+            data = json.load(sys.stdin)
+            result = [
+                {
+                    "donator_name": d["donator"]["donator_name"],
+                    "amount": d["donator_data"]["amount"],
+                    "timestamp": d["donator_data"]["timestamp"],
+                    "message": d["donator_data"]["message"]
+                }
+                for d in data
+            ]
+            json.dump(result, sys.stdout, ensure_ascii=False)
+            ' > donates.json
+
+      - name: delete old release
+        run: |
+          gh release delete latest -y || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: upload donates.json in a release
+        run: |
+          gh release create latest \
+            --title "latest donates" \
+            --notes "automated daily update of donations" \
+            donates.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
