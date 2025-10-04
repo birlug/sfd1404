@@ -109,7 +109,7 @@
 
 
 
-    
+
     // countdown
     const countdownEl = document.querySelector('.countdown-bar');
     if (!countdownEl) return;
@@ -129,11 +129,10 @@
     function updateCountdown() {
       const now = new Date();
       const diff = targetDate - now;
-      
+
       // جشن شروع شده
       if (diff <= 0) {
         const diffSinceStart = now - targetDate;
-        // اگر کمتر از ۴ ساعت گذشته
         if (diffSinceStart < 4 * 60 * 60 * 1000) {
           document.getElementById('timer').style.display = 'none';
           liveBadge.style.display = 'flex';
@@ -141,10 +140,9 @@
           canvas.classList.remove("canvas_hidden")
           countdownTitle.style.display = "none";
         } else {
-          // بعد از ۴ ساعت
           document.getElementById('timer').style.display = 'none';
           liveBadge.style.display = 'flex';
-          liveBadge.textContent = '✨ جشن تمام شد، سال بعد می‌بینمتون';
+          liveBadge.textContent = '✨ جشن تمام شد، سال بعد میبینیمتون';
           canvas.classList.add("canvas_hidden")
           countdownTitle.style.display = "none";
         }
