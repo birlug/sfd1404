@@ -1,32 +1,32 @@
-name: fetch donates
+# name: fetch donates
 
-on:
-  schedule:
-    - cron: "25 12 * * *"
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: "25 12 * * *"
+#   workflow_dispatch:
 
-jobs:
-  fetch-donates:
-    runs-on: ubuntu-latest
-    environment: github-pages
+# jobs:
+#   fetch-donates:
+#     runs-on: ubuntu-latest
+#     environment: github-pages
 
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Checkout repo
+#         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.x"
+#       - name: Set up Python
+#         uses: actions/setup-python@v4
+#         with:
+#           python-version: "3.x"
 
-      - name: Install dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r tools/requirements.txt
+#       - name: Install dependencies
+#         run: |
+#           pip install --upgrade pip
+#           pip install -r tools/requirements.txt
 
-      - name: Run donation fetch script
-        env:
-          AUTH_TOKEN: ${{ secrets.DONATES_AUTH }}
-        run: |
-          python3 tools/fetch_donations.py
+#       - name: Run donation fetch script
+#         env:
+#           AUTH_TOKEN: ${{ secrets.DONATES_AUTH }}
+#         run: |
+#           python3 tools/fetch_donations.py
 
