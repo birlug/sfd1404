@@ -1,5 +1,5 @@
 <section class="gallery-section">
-  <h2>{{ .Get "title" | default "گالری" }}</h2>
+  <h2>{{ .Get "title" | default "" }}</h2>
   <div class="gallery">
 
     {{ $folder := .Get "folder" | default "gallery" }}
