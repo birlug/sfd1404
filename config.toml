@@ -1,5 +1,5 @@
-baseURL = 'https://sfd.birlug.ir'
+baseURL = 'https://birlug.ir/sfd-1404/'
 languageCode = 'fa-ir'
 title = 'جشن آزادی نرم‌افزار ۱۴۰۴'
 [params]
-  banner = "/image/sfd.png"
+  banner = "image/sfd.png"

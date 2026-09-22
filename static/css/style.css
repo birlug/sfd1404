@@ -15,7 +15,7 @@
   font-display: auto;
   font-style: normal;
   font-weight: 400;
-  src: url('/font/Vazirmatn-Regular.woff2') format('woff2');
+  src: url('../font/Vazirmatn-Regular.woff2') format('woff2');
 }
 
 body {
