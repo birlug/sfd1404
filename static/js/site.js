@@ -162,6 +162,33 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    var tabNav = document.querySelector('.media-tabs');
+    if (tabNav) {
+      var tabs = tabNav.querySelectorAll('[data-tab]');
+      var panels = [];
+      tabs.forEach(function (tab) {
+        var panel = document.getElementById(tab.getAttribute('data-tab'));
+        if (panel) panels.push(panel);
+      });
+      if (panels.length) {
+        panels.slice(1).forEach(function (panel) {
+          panel.hidden = true;
+        });
+        tabNav.addEventListener('click', function (e) {
+          var tab = e.target.closest('[data-tab]');
+          if (!tab) return;
+          e.preventDefault();
+          var targetId = tab.getAttribute('data-tab');
+          tabs.forEach(function (t) {
+            t.classList.toggle('active', t === tab);
+          });
+          panels.forEach(function (panel) {
+            panel.hidden = panel.id !== targetId;
+          });
+        });
+      }
+    }
   });
 })();
 

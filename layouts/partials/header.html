@@ -1,7 +1,7 @@
 <nav class="navbar" dir="rtl">
   <div class="nav-container">
-    <a class="brand" href="{{ "/" | relURL }}">
-        <img src="{{ "/image/logo.png" | relURL }}" class="brand-logo">
+    <a class="brand" href="{{ .Site.Home.RelPermalink }}">
+        <img src="{{ "image/logo.png" | relURL }}" class="brand-logo">
       <span class="brand-title">{{ .Site.Title }}</span>
     </a>
     <button class="nav-toggle" aria-label="باز کردن منو" aria-expanded="false">
@@ -11,22 +11,25 @@
     </button>
     <ul class="nav-links">
       <li>
-        <a class="nav-link {{ if eq .RelPermalink "/" }}active{{ end }}" href="{{ "/" | relURL }}">خانه</a>
+        <a class="nav-link {{ if .IsHome }}active{{ end }}" href="{{ .Site.Home.RelPermalink }}">خانه</a>
       </li>
       <li>
-        <a class="nav-link {{ if hasPrefix .RelPermalink "/staff/" }}active{{ end }}" href="{{ "/staff/" | relURL }}">همکاری</a>
+        <a class="nav-link {{ if hasPrefix .RelPermalink ("gallery/" | relURL) }}active{{ end }}" href="{{ "gallery/" | relURL }}">گالری</a>
       </li>
       <li>
-        <a class="nav-link {{ if hasPrefix .RelPermalink "/call-for-paper/" }}active{{ end }}" href="{{ "/call-for-paper/" | relURL }}">ارائه</a>
+        <a class="nav-link {{ if hasPrefix .RelPermalink ("staff/" | relURL) }}active{{ end }}" href="{{ "staff/" | relURL }}">همکاری</a>
       </li>
       <li>
-        <a class="nav-link {{ if hasPrefix .RelPermalink "/news/" }}active{{ end }}" href="{{ "/news/" | relURL }}">خبر</a>
+        <a class="nav-link {{ if hasPrefix .RelPermalink ("call-for-paper/" | relURL) }}active{{ end }}" href="{{ "call-for-paper/" | relURL }}">ارائه</a>
       </li>
       <li>
-        <a class="nav-link {{ if hasPrefix .RelPermalink "/register/" }}active{{ end }}" href="{{ "/register/" | relURL }}">ثبت‌نام</a>
+        <a class="nav-link {{ if hasPrefix .RelPermalink ("news/" | relURL) }}active{{ end }}" href="{{ "news/" | relURL }}">خبر</a>
       </li>
       <li>
-        <a class="nav-link {{ if hasPrefix .RelPermalink "/donation/" }}active{{ end }}" href="{{ "/donation/" | relURL }}">حمایت ❤</a>
+        <a class="nav-link {{ if hasPrefix .RelPermalink ("register/" | relURL) }}active{{ end }}" href="{{ "register/" | relURL }}">ثبت‌نام</a>
+      </li>
+      <li>
+        <a class="nav-link {{ if hasPrefix .RelPermalink ("donation/" | relURL) }}active{{ end }}" href="{{ "donation/" | relURL }}">حمایت ❤</a>
       </li>
     </ul>
   </div>

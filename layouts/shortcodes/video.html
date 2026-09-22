@@ -1,5 +1,16 @@
-<section class="gallery-section">
-  <h2>پیام‌های ویدیویی</h2>
-  <iframe title="Behdad Esfahbod Speech for BirSFD" width="560" height="315" src="https://tubedu.org/videos/embed/mp2hUTTDV7Qhy6gAL7rGtZ" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" onload="this.parentElement.classList.add('loaded')"></iframe>
-  <iframe title="Jadi Speech for BirSFD" width="560" height="315" src="https://tubedu.org/videos/embed/uVuvSBzzwXuQr3S3zyWfBN" allowfullscreen="" frameborder="0" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" onload="this.parentElement.classList.add('loaded')"></iframe>
+<section class="gallery-section" {{ with .Get "id" }}id="{{ . }}"{{ end }}>
+  <h2>{{ .Get "title" | default "پیام‌های ویدیویی" }}</h2>
+  {{ $urls := slice }}
+  {{ with .Get "url" }}{{ $urls = $urls | append . }}{{ end }}
+  {{ with .Get "url2" }}{{ $urls = $urls | append . }}{{ end }}
+  {{ if not $urls }}
+    {{ $urls = slice
+      "https://tubedu.org/videos/embed/mp2hUTTDV7Qhy6gAL7rGtZ"
+      "https://tubedu.org/videos/embed/uVuvSBzzwXuQr3S3zyWfBN"
+    }}
+  {{ end }}
+  {{ range $urls }}
+    {{ $src := strings.TrimSuffix "?" (replace . "/w/" "/videos/embed/") }}
+    <iframe title="video" width="560" height="315" src="{{ $src }}" frameborder="0" allowfullscreen="" sandbox="allow-same-origin allow-scripts allow-popups allow-forms" onload="this.parentElement.classList.add('loaded')"></iframe>
+  {{ end }}
 </section>

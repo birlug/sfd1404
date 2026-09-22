@@ -1,1 +1,1 @@
-{{ .Get 0 | relURL }}
+{{ .Get 0 | strings.TrimPrefix "/" | relURL }}
